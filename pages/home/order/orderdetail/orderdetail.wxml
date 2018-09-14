@@ -1,0 +1,83 @@
+<view class='all'>
+  
+<!-- 协议客户 START-->
+  
+<!-- 协议客户 START-->
+ 
+ 
+  <view class="order-list" wx:for="{{list}}" > 
+  <view class="order-content" bindtap='walClick' >
+      <view class='order-car' >
+           行程明细
+      </view>
+      <view class="order-detail">
+          <view class='order-time iconfont icon-shijian-copy'>
+            用车日期  {{item.userDate}}
+          </view>
+          <view class='order-start iconfont icon-qidian-copy'>
+            用车时间  {{item.userTime}}
+          </view>
+          <view class='order-start iconfont icon-qidian-copy' >
+             上车地点  {{item.onLocation}}
+          </view>
+          <view class='order-end iconfont icon-zhongdian-copy'>
+             下车地点  {{item.offLocation}}
+          </view>
+          <view class='order-end iconfont icon-zhongdian-copy'>
+             航班号  {{item.flightNumber}}
+          </view>
+           <view class='order-end iconfont icon-zhongdian-copy'>
+             乘车人  {{item.byCustomerName}}
+          </view>
+         <view class='order-end iconfont icon-zhongdian-copy'>
+             乘车电话  {{item.byCustomerPhone}}
+          </view>
+          <view class='order-end iconfont icon-zhongdian-copy'>
+             车型  {{item.carType}}
+          </view>
+      </view>
+  </view>
+ </view>
+
+
+ 
+  <view class="order-list"> 
+  <view class="order-content" bindtap='walClick'>
+      <view class='order-car' >
+          司机明细
+      </view>
+      <view class="order-detail">
+          <view class='order-time iconfont icon-shijian-copy'>
+            司机姓名  
+          </view>
+          <view class='order-start iconfont icon-qidian-copy'>
+            车牌  
+          </view>
+
+      </view>
+  </view>
+ </view>
+
+
+ 
+  <view class="order-list"> 
+  <view class="order-content" bindtap='walClick'>
+      <view class='order-car' >
+          服务评价
+      </view>
+      <view class="order-detail">
+          <view class='order-time iconfont icon-shijian-copy'>
+            好评，差评
+          </view>
+      </view>
+  </view>
+ </view>
+
+<!-- 订单列表 END-->
+ 
+
+<!-- 协议客户 END-->
+
+
+</view>
+ 

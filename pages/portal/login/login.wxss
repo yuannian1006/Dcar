@@ -1,0 +1,45 @@
+.image {
+  width: 100%;
+  height: 300rpx;
+}
+
+/* .item{
+  margin-top:30%;
+} */
+
+.form-usrname {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.forgotcode {
+  color: red;
+  margin-left: 65%;
+}
+
+.list-input {
+  border: 1px solid black;
+}
+
+.toregister {
+  margin-left: 3%;
+  margin-top: 2%;
+}
+
+.loginOne {
+  margin: auto;
+  margin-top: 26px;
+  width: 97%;
+}
+
+.weui-cell_input {
+  padding-top: 1;
+  padding-bottom: 0;
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+/* .page {
+  background-color: #f0f0f0;
+} */
