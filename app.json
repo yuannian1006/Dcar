@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/home/wallet/wallet",
+    "pages/portal/register/register",
+    "pages/portal/registerpwd/registerpwd",
+    "pages/home/order/orderdetail/orderdetail",
+    "pages/home/order/orderinit/orderinit",
+    "pages/home/user/user",
+    "pages/home/system/syspwdsubmit/syspwdsubmit",
+    "pages/home/system/syspwd/syspwd",
+    "pages/home/system/system",
+    "pages/home/system/uguide/uguide",
+    "pages/home/order/order",
+
+    "pages/portal/login/login",
+
+    "pages/portal/tos/tos",
+    "pages/portal/updatepwd/updatepwd"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4F94CD",
+    "navigationBarTitleText": "小数点汽车",
+    "background-color": "#fff"
+  }
+}

@@ -1,0 +1,307 @@
+<view class="page">
+  <view class='all'>
+    <view class='agr1'>
+
+      <image src='/images/agr/001.png' class='agr-image' mode='scaleToFill' bindtap='toUsrHome'></image>
+
+      <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{curtTab == index ? 'active' : ''}}" wx:key="unique" bindtap='navbarTap'>{{item}}</text>
+
+    </view>
+
+    <view class="page__bd">
+      <!-- 协议客户 START-->
+      <view hidden="{{curtTab!==0}}" class='agr1-form'>
+        <form bindsubmit="xyFormSubmit">
+          <view class='afa'>
+            <text wx:for="{{items}}" data-idx="{{index}}" class="item1 {{curtList == index ? 'on' : ''}}" wx:key="unique" bindtap='navbarTap1'>{{item}}</text>
+          </view>
+
+          <view class="afaSub1">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+
+                <view class="weui-label iconfont icon-techreport"> 用车日期</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" start="2018-05-20" end="2017-09-01" bindchange="bindDateChange">
+                  <view class="picker11">
+                    {{date}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-shijian"> 用车时间</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="time" value="{{time}}" start="00:00" end="24:00" bindchange="bindTimeChange">
+                  <view class="picker11">
+                    {{time}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-qidian"> 上车地点</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="onLocation" value='{{startLocation}}' placeholder="请输入上车地点" bindtap='getOnLocation' />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-zhongdian"> 下车地点</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="offLocation" value='{{endLocation}}' bindtap='getOffLocation' placeholder="请输入下车地点" />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-jingguo"> 途径行程</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="viaLocation" placeholder="请输入途径行程" />
+              </view>
+            </view>
+
+            <view hidden="{{curtList!==2}}">
+              <view class="weui-cell weui-cell_input">
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" />
+                </view>
+              </view>
+            </view>
+            <view hidden="{{curtList!==3}}">
+              <view class="weui-cell weui-cell_input">
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" />
+                </view>
+              </view>
+            </view>
+
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-ren"> 乘车人</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="byCustomerName" placeholder="请输入乘车人" />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-dianhua1"> 联系电话</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="number" maxlength="11" value='{{phoneNo}}' value='{{phoneNo}}' bindinput='getPhoneNo' name="byCustomerPhone" placeholder="请输入联系电话" />
+              </view>
+            </view>
+
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-cheliang"> 车型选择</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                  <view class="picker11">
+                    {{array[index]}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-beizhu"> 用车备注</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="notes" placeholder="用车备注" />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+            </view>
+          </view>
+
+
+
+
+
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" formType="submit">提交</button>
+          </view>
+
+
+        </form>
+      </view>
+
+      <!-- 协议客户 END-->
+
+
+      <!-- 临时客户 START -->
+      <view hidden="{{curtTab!==1}}" class='agr1-form'>
+        <form bindsubmit="lsFormSubmit">
+          <view class='afa'>
+            <text wx:for="{{items}}" data-idx="{{index}}" class="item1 {{curtList == index ? 'on' : ''}}" wx:key="unique" bindtap='navbarTap1'>{{item}}</text>
+          </view>
+
+          <map class='mapclass' map id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}" scale='16' show-location style="width:100%; height: 130px;" polyline="{{polyline}}" controls="{{controls}}"></map>
+
+
+          <view class="afaSub1">
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+
+                <view class="weui-label iconfont icon-techreport"> 用车日期</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="date" value="{{date}}" start="2018-05-20" end="2017-09-01" bindchange="bindDateChange">
+                  <view class="picker11">
+                    {{date}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-shijian"> 用车时间</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="time" value="{{time}}" start="00:00" end="24:00" bindchange="bindTimeChange">
+                  <view class="picker11">
+                    {{time}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-qidian"> 上车地点</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="lsOnLocation" value='{{startLocation}}' placeholder="请输入上车地点" bindtap='getOnLocation' />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-zhongdian"> 下车地点</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="lsOffLocation" value='{{endLocation}}' bindtap='getOffLocation' placeholder="请输入下车地点" />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-jingguo"> 途径行程</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="viaLocation" placeholder="请输入途径行程" />
+              </view>
+            </view>
+
+            <view hidden="{{curtList!==2}}">
+              <view class="weui-cell weui-cell_input">
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="lsFlightNumber" placeholder="请输入航班号" />
+                </view>
+              </view>
+            </view>
+            <view hidden="{{curtList!==3}}">
+              <view class="weui-cell weui-cell_input">
+              </view>
+              <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                  <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <input class="weui-input" name="lsFlightNumber" placeholder="请输入航班号" />
+                </view>
+              </view>
+            </view>
+
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-ren"> 乘车人</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="lsByCustomerName" placeholder="请输入乘车人" />
+              </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input weui-cell_vcode">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-dianhua1"> 联系电话</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" type="number" maxlength="11" name="lsByCustomerPhone" value='{{phoneNo}}' bindinput='getPhoneNo' placeholder="请输入联系电话" />
+              </view>
+            </view>
+
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-cheliang"> 车型选择</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                  <view class="picker11">
+                    {{array[index]}}
+                  </view>
+                </picker>
+              </view>
+            </view>
+
+
+            <view class="weui-cell weui-cell_input">
+              <view class="weui-cell__hd">
+                <view class="weui-label iconfont icon-beizhu"> 用车备注</view>
+              </view>
+              <view class="weui-cell__bd">
+                <input class="weui-input" name="notes" placeholder="用车备注" />
+              </view>
+            </view>
+          </view>
+
+          <view class="weui-cell weui-cell_input">
+          </view>
+
+          <view class="weui-btn-area">
+            <button class="weui-btn" type="primary" formType="submit">提交</button>
+          </view>
+        </form>
+      </view>
+      <!-- 临时客户 END -->
+    </view>
+
+
+  </view>
+</view>
