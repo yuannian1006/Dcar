@@ -1,0 +1,43 @@
+page{
+background-color:#F0F0F0;
+height:100%;
+font-size: 18px;
+}
+
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #FFFFFF;
+    height: 2.3em;
+    line-height: 2.3em;
+    color: #cfcfcf;
+}
+.iconfont {
+  font-size:31px;
+  font-style:normal;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.weui-flex__item_title {
+-webkit-box-flex:1;
+-webkit-flex:1;
+flex:1;
+}
+
+.weui-flex_title {
+display:-webkit-box;
+display:-webkit-flex;
+display:flex;
+}
+
+.wallet-label{
+   margin-top:-22px;
+}
+
+
+
+
+
+
