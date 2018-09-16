@@ -48,10 +48,10 @@
       </view>
       <view class="order-detail">
           <view class='order-time iconfont icon-shijian-copy'>
-            司机姓名  
+            司机姓名  {{driverName}}
           </view>
           <view class='order-start iconfont icon-qidian-copy'>
-            车牌  
+            车牌   {{carLicense}}
           </view>
 
       </view>

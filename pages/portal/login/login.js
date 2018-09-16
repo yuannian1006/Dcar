@@ -39,9 +39,12 @@ Page({
     }
 
     //加载提示框
+
     wx.request({
       method: "POST",
+      // url: app.globalData.apiUrl + '/system/user/login',
       url: app.globalData.apiUrl + '/login',
+
       data: {
         no: no,
         password: password
@@ -52,7 +55,7 @@ Page({
       success: function (res) {
         console.log("登录的res", res)
         var code = res.data.code;
-        console.log(res.data.results.tsSysUserId);
+        // console.log(res.data.results.tsSysUserId);
         if (code == 10000) {
           // 后台传递过来的值
           var tsSysUserId = res.data.results.tsSysUserId;//用户ID
