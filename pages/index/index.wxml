@@ -67,7 +67,7 @@
                 <view class="weui-label iconfont icon-jingguo"> 途径行程</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" name="viaLocation" placeholder="请输入途径行程" />
+                <input class="weui-input" name="viaLocation" value='{{viaLocation}}' bindtap='getTuLocation' placeholder="请输入途径行程" />
               </view>
             </view>
 
@@ -134,7 +134,7 @@
                 <view class="weui-label iconfont icon-beizhu"> 用车备注</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" name="notes" placeholder="用车备注" />
+                <input class="weui-input" name="notes" value='{{notes}}' bindtap='getNotes' placeholder="用车备注" />
               </view>
             </view>
 
@@ -218,7 +218,7 @@
                 <view class="weui-label iconfont icon-jingguo"> 途径行程</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" name="viaLocation" placeholder="请输入途径行程" />
+                <input class="weui-input" name="viaLocation" value='{{viaLocation}}' bindtap='getTuLocation' placeholder="请输入途径行程" />
               </view>
             </view>
 
@@ -286,7 +286,7 @@
                 <view class="weui-label iconfont icon-beizhu"> 用车备注</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" name="notes" placeholder="用车备注" />
+                <input class="weui-input" name="notes" value='{{notes}}' bindtap='getNotes' placeholder="用车备注" />
               </view>
             </view>
           </view>
