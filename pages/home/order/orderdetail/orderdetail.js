@@ -30,8 +30,11 @@ Page({
   onLoad: function (options) {
     var _this = this
     wx.request({
-      url: app.globalData.apiUrl +'/querylistByPage',
+      // url: app.globalData.apiUrl +'/system/ppOrderDetail/queryXXL',
+      url: app.globalData.apiUrl + '/queryXXL',
+
       data: { dcPpOrderId: JSON.parse(options.dcPpOrderId)},
+      
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -52,6 +55,7 @@ Page({
    * 点击时把数组的index给curtTab
    */
   navbarTap: function (e) {
+    console.log("到这里了01")
     this.setData({
       curtTab: e.currentTarget.dataset.idx
     })

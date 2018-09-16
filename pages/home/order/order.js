@@ -31,9 +31,11 @@ Page({
   */
   onLoad: function (options) {
     var _this = this
+    console.log("到这里02")
     wx.request({
-      url: app.globalData.apiUrl +'/querylistByPage',
-      data: { orderStatus: 'N'},
+      // url: app.globalData.apiUrl +'/system/ppOrder/queryXXL',
+      url: app.globalData.apiUrl + '/queryXXL',
+      data: { orderStatus: '新建', tsSysUserId: app.globalData.tsSysUserId},
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -70,20 +72,22 @@ Page({
       curtList: e.currentTarget.dataset.idx
     })
 
-    var orderStatusO = 'N';
+    var orderStatusO = '新建';
     if (e.currentTarget.dataset.idx == 0) {
-      orderStatusO = 'N'
+      orderStatusO = '新建'
     } else if (e.currentTarget.dataset.idx == '1') {
-      orderStatusO = 'C'
+      orderStatusO = '已完成'
     } else if (e.currentTarget.dataset.idx == '2') {
-      orderStatusO = 'Q'
+      orderStatusO = '取消'
     } else if (e.currentTarget.dataset.idx == '3') {
-      orderStatusO = 'XX'
+      orderStatusO = ''
     }  
     var _this = this
     wx.request({
-      url: app.globalData.apiUrl + '/querylistByPage',
-      data: { orderStatus: orderStatusO },
+      // url: app.globalData.apiUrl + '/system/ppOrder/queryXXL',
+      url: app.globalData.apiUrl + '/queryXXL',
+
+      data: { orderStatus: orderStatusO, tsSysUserId: app.globalData.tsSysUserId },
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -115,6 +119,7 @@ Page({
    
      wx.navigateTo({ 
        url: "orderdetail/orderdetail?dcPpOrderId=" + JSON.stringify(e.currentTarget.dataset.id), 
+       
       })
   }
 

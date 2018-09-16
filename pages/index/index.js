@@ -175,6 +175,7 @@ Page({
     var userDateInit = this.data.date;
     var userTimeInit = this.data.time;
     var carTypeInit = this.data.array[this.data.index];
+    var orderType = this.data.curtList;
     if (app.globalData.no == null) {
 
       wx.navigateTo({ url: "../portal/login/login" })
@@ -183,9 +184,24 @@ Page({
       console.log("单位/个人 ", app.globalData.tsSysUserId);
       //加载提示框
       console.log("上车地点", this.data.startLocation)
+
+      if (this.data.curtList==0){
+        orderType ='单程车';
+      } else if (this.data.curtList == 1) {
+        orderType = '包车';
+      } else if (this.data.curtList == 2) {
+        orderType = '接机';
+      } else if (this.data.curtList == 3) {
+        orderType = '送机';
+      }
+
       wx.request({
+
+        
         method: "POST",
+        // url: app.globalData.apiUrl + '/system/ppOrder/add',
         url: app.globalData.apiUrl + '/add',
+
         data: {
           userDate: this.data.date,
           userTime: this.data.time,
@@ -196,10 +212,11 @@ Page({
           byCustomerName: e.detail.value.byCustomerName,
           byCustomerPhone: e.detail.value.byCustomerPhone,
           carType: this.data.array[this.data.index],
-          notes: this.data.value.notes,
-          orderType: this.data.curtList,
-          orderStatus: 'N',
+          remark: this.data.notes,
+          orderType: orderType,
+          orderStatus: '新建',
           orderSource: '小程序',
+          serviceType:'L',
           tsSysUserId: app.globalData.tsSysUserId
 
         },
@@ -212,8 +229,6 @@ Page({
           var code = res.data.code;
           if (code == 1000000) {
             // 后台传递过来的值
-
-
             // 切换到首页
 
             wx.redirectTo({ url: "../home/order/orderinit/orderinit?userDate=" + userDateInit + "&userTime=" + userTimeInit + "&carType=" + carTypeInit })
@@ -269,6 +284,7 @@ Page({
     var userDateInit = this.data.date;
     var userTimeInit = this.data.time;
     var carTypeInit = this.data.array[this.data.index];
+    var orderType = this.data.curtList;
     if (app.globalData.no == null) {
 
       wx.navigateTo({ url: "../portal/login/login" })
@@ -277,9 +293,18 @@ Page({
       console.log(app.globalData.tsSysUserId);
       //加载提示框
 
+      if (this.data.curtList == 0) {
+        orderType = '单程车';
+      } else if (this.data.curtList == 1) {
+        orderType = '包车';
+      } else if (this.data.curtList == 2) {
+        orderType = '接机';
+      } else if (this.data.curtList == 3) {
+        orderType = '送机';
+      }
       wx.request({
         method: "POST",
-        url: app.globalData.apiUrl + '/add',
+        url: app.globalData.apiUrl + '/system/ppOrder/add',
         data: {
           userDate: this.data.date,
           userTime: this.data.time,
@@ -290,8 +315,8 @@ Page({
           byCustomerName: e.detail.value.lsByCustomerName,
           byCustomerPhone: e.detail.value.lsByCustomerPhone,
           carType: this.data.array[this.data.index],
-          notes: this.data.value.notes,
-          orderType: this.data.curtList,
+          remark: this.data.value.notes,
+          orderType: orderType,
           orderStatus: 'N',
           orderSource: '小程序',
           tsSysUserId: app.globalData.tsSysUserId
