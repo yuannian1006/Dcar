@@ -16,17 +16,17 @@ Page({
     longitude: 113.324520,
     array: ['5座公务轿车', '7座商务车', '5座豪华车', '19座考斯特', '45座豪华大巴', '豪华婚车'],
     date: util.formatTime(new Date), //用车日期
-    time: util.formatTime2(new Date()),//用车时间
+    time: util.formatTime2(new Date()), //用车时间
     index: 0, //车型
     startLocation: "", //上车地点
     endLocation: "", //下车地点
     viaLocation: "", //途径行程
-    phoneNo: "",  //获取机上的联系人号码
+    phoneNo: "", //获取机上的联系人号码
     slatitude: "", //上车维度   后续定义为一个对象{}
     slongitude: "", //上车经度
     elatitude: "", //下车维度
     elongitude: "", //下车经度
-
+    notes: "", //提交订单时的备注
 
   },
 
@@ -109,12 +109,16 @@ Page({
       // wx.navigateTo({url:"../login/login"})
       console.log("这是点击头像 但无用户信息 指示用户到登录页面登录")
       // wx.redirectTo({ url: "../portal/login/login" })
-      wx.navigateTo({ url: "../portal/login/login" })
+      wx.navigateTo({
+        url: "../portal/login/login"
+      })
     } else {
 
 
       console.log("这是点击头像 跳转到用户中心")
-      wx.navigateTo({ url: "../home/user/user" })
+      wx.navigateTo({
+        url: "../home/user/user"
+      })
 
     }
   },
@@ -146,12 +150,22 @@ Page({
     console.log("协议订单提交");
     console.log(e);
 
+    //
+    util.isNull(e.detail.value.onLocation);
+    util.isNull(e.detail.value.viaLocation);
+    util.isNull(e.detail.value.offLocation);
+    util.isNull(e.detail.value.byCustomerName);
+
+    console.log("是否有值1 " + app.globalData.isOk)
+
+
     //YN 手机号码校验
     var phone = this.data.phoneNo
     if (phone == '') {
       wx.showToast({
         title: '手机号不能为空',
       })
+      app.globalData.isOk = false
       return false
     } else if (phone.length != 11) {
       wx.showToast({
@@ -159,8 +173,10 @@ Page({
         icon: 'success',
         duration: 1500
       })
-      return false;
-    }
+      app.globalData.isOk = false
+      return false
+    } 
+    console.log("是否有值2 " + app.globalData.isOk)
     var myreg = /^(((1[0-9]{2})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!myreg.test(phone)) {
       wx.showToast({
@@ -168,25 +184,32 @@ Page({
         icon: 'success',
         duration: 1500
       })
+      app.globalData.isOk = false
       return false;
-    }
-
+    } 
+    console.log("是否有值3 " + app.globalData.isOk)
 
     var userDateInit = this.data.date;
     var userTimeInit = this.data.time;
     var carTypeInit = this.data.array[this.data.index];
     var orderType = this.data.curtList;
+
+    console.log("是否有值4 " + app.globalData.isOk)
     if (app.globalData.no == null) {
 
-      wx.navigateTo({ url: "../portal/login/login" })
-    } else {
+      wx.navigateTo({
+        url: "../portal/login/login"
+      })
+    }
+    console.log("***5 " + app.globalData.isOk)
+    if (app.globalData.isOk) {
       console.log("测试单位");
       console.log("单位/个人 ", app.globalData.tsSysUserId);
       //加载提示框
       console.log("上车地点", this.data.startLocation)
 
-      if (this.data.curtList==0){
-        orderType ='单程车';
+      if (this.data.curtList == 0) {
+        orderType = '单程车';
       } else if (this.data.curtList == 1) {
         orderType = '包车';
       } else if (this.data.curtList == 2) {
@@ -197,7 +220,7 @@ Page({
 
       wx.request({
 
-        
+
         method: "POST",
         // url: app.globalData.apiUrl + '/system/ppOrder/add',
         url: app.globalData.apiUrl + '/add',
@@ -212,11 +235,11 @@ Page({
           byCustomerName: e.detail.value.byCustomerName,
           byCustomerPhone: e.detail.value.byCustomerPhone,
           carType: this.data.array[this.data.index],
-          remark: this.data.notes,
+          remark: e.detail.value.notes,
           orderType: orderType,
           orderStatus: '新建',
           orderSource: '小程序',
-          serviceType:'L',
+          serviceType: 'L',
           tsSysUserId: app.globalData.tsSysUserId
 
         },
@@ -225,13 +248,21 @@ Page({
           'Authorization': app.globalData.token
         },
         success: function (res) {
-          console.log("提交订单的res", res)
+          console.log("提交成功的res", res)
           var code = res.data.code;
-          if (code == 1000000) {
+          if (code == 10000) {
             // 后台传递过来的值
-            // 切换到首页
+            wx.showToast({
+              title: '预定成功！！',
+              icon: 'success',
+              duration: 5000
+            })
 
-            wx.redirectTo({ url: "../home/order/orderinit/orderinit?userDate=" + userDateInit + "&userTime=" + userTimeInit + "&carType=" + carTypeInit })
+            wx.navigateTo({
+              url: "../home/order/order"
+            })
+
+            // wx.navigateTo({ url: "../home/order/orderinit/orderinit?userDate=" + userDateInit + "&userTime=" + userTimeInit + "&carType=" + carTypeInit })
           } else {
 
           }
@@ -255,12 +286,25 @@ Page({
     console.log("临客订单提交");
     console.log(e);
 
+    //
+    util.isNull(e.detail.value.lsOnLocation);
+    util.isNull(e.detail.value.lsOffLocation);
+    util.isNull(e.detail.value.viaLocation);
+    util.isNull(e.detail.value.lsByCustomerName);
+
+    console.log("奇怪1 " + e.detail.value.onLocation)
+    console.log("奇怪2 " + e.detail.value.byCustomerName)
+
+
+    console.log("是否有值1 " + app.globalData.isOk)
+
     //YN 手机号码校验
     var phone = this.data.phoneNo
     if (phone == '') {
       wx.showToast({
         title: '手机号不能为空',
       })
+      app.globalData.isOk = false
       return false
     } else if (phone.length != 11) {
       wx.showToast({
@@ -268,8 +312,10 @@ Page({
         icon: 'success',
         duration: 1500
       })
-      return false;
+      app.globalData.isOk = false
+      return false
     }
+
     var myreg = /^(((1[0-9]{2})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!myreg.test(phone)) {
       wx.showToast({
@@ -277,8 +323,9 @@ Page({
         icon: 'success',
         duration: 1500
       })
-      return false;
-    }
+      app.globalData.isOk = false
+      return false
+    } 
 
 
     var userDateInit = this.data.date;
@@ -287,8 +334,12 @@ Page({
     var orderType = this.data.curtList;
     if (app.globalData.no == null) {
 
-      wx.navigateTo({ url: "../portal/login/login" })
-    } else {
+      wx.navigateTo({
+        url: "../portal/login/login"
+      })
+    }
+
+    if (app.globalData.isOk) {
       console.log("测试单位");
       console.log(app.globalData.tsSysUserId);
       //加载提示框
@@ -304,21 +355,26 @@ Page({
       }
       wx.request({
         method: "POST",
-        url: app.globalData.apiUrl + '/system/ppOrder/add',
+        // url: app.globalData.apiUrl + '/system/ppOrder/add',
+
+        url: app.globalData.apiUrl + '/add',
+
+
         data: {
           userDate: this.data.date,
           userTime: this.data.time,
-          onLocation: e.detail.value.lsOnLocation,
-          offLocation: e.detail.value.lsOffLocation,
+          onLocation: e.detail.value.onLocation,
           tuLocation: e.detail.value.viaLocation,
-          flightNumber: e.detail.value.lsFlightNumber,
-          byCustomerName: e.detail.value.lsByCustomerName,
-          byCustomerPhone: e.detail.value.lsByCustomerPhone,
+          offLocation: e.detail.value.offLocation,
+          flightNumber: e.detail.value.flightNumber,
+          byCustomerName: e.detail.value.byCustomerName,
+          byCustomerPhone: e.detail.value.byCustomerPhone,
           carType: this.data.array[this.data.index],
-          remark: this.data.value.notes,
+          remark: e.detail.value.notes,
           orderType: orderType,
-          orderStatus: 'N',
+          orderStatus: '新建',
           orderSource: '小程序',
+          serviceType: 'L',
           tsSysUserId: app.globalData.tsSysUserId
 
         },
@@ -332,10 +388,20 @@ Page({
           if (code == 10000) {
             // 后台传递过来的值
 
+            wx.hideLoading()
+            wx.showToast({
+              title: '预定成功！！',
+              icon: 'success',
+              duration: 5000
+            })
 
             // 切换到首页
-
-            wx.redirectTo({ url: "../home/order/orderinit/orderinit?userDate=" + userDateInit + "&userTime=" + userTimeInit + "&carType=" + carTypeInit })
+            wx.navigateTo({
+              url: "../home/order/order"
+            })
+            // wx.navigateTo({
+            //   url: "../home/order/orderinit/orderinit?userDate=" + userDateInit + "&userTime=" + userTimeInit + "&carType=" + carTypeInit
+            // })
           } else {
 
           }
@@ -401,9 +467,10 @@ Page({
         })
       },
     })
+    console.log("endLocation " + this.data.endLocation)
   },
 
-  /**输入途径行程 */
+  /**输入途径行程 getTuLocation*/
 
 
   /**获取输入的手机号码 */
