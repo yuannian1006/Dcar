@@ -79,7 +79,7 @@
                   <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" />
+                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" bindtap='getFlightNumber' />
                 </view>
               </view>
             </view>
@@ -91,7 +91,7 @@
                   <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" />
+                  <input class="weui-input" name="flightNumber" placeholder="请输入航班号" bindtap='getFlightNumber' />
                 </view>
               </view>
             </view>
@@ -230,7 +230,7 @@
                   <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" name="lsFlightNumber" placeholder="请输入航班号" />
+                  <input class="weui-input" name="lsFlightNumber1" value='{{flightNumber}}' placeholder="请输入航班号" bindtap='getFlightNumber1' />
                 </view>
               </view>
             </view>
@@ -242,7 +242,8 @@
                   <view class="weui-label iconfont icon-hangban-copy"> 航班号</view>
                 </view>
                 <view class="weui-cell__bd">
-                  <input class="weui-input" name="lsFlightNumber" placeholder="请输入航班号" />
+                 
+                  <input class="weui-input" name="lsFlightNumber2" value='{{flightNumber}}' placeholder="请输入航班号" bindtap='getFlightNumber2' />
                 </view>
               </view>
             </view>

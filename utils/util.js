@@ -51,23 +51,16 @@ const formatNumber = n => {
 }
 
 function isNull(msg){
-
-  console.log("msg   =" + msg)
   if(msg == null || msg == ''){
-
-
     wx.showToast({
       title: '信息填写有误！',
       icon: 'fail',
       duration: 3000
     })
-    console.log("*** " + app.globalData.isOk)
     app.globalData.isOk = false
-    console.log("*** " + app.globalData.isOk)
     return false
   }else{
     app.globalData.isOk = true
-    console.log("***util else " + app.globalData.isOk)
     return true
   }
 
