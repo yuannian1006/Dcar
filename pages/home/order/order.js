@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    items: ['接单中','已完成','已取消','全部'],
+    items: ['接单中', '已完成', '已取消', '全部'],
     curtTab: 0,
     curtList: 0,
     latitude: 23.099994,
@@ -31,11 +31,12 @@ Page({
   */
   onLoad: function (options) {
     var _this = this
-    console.log("到这里02")
+    console.log("到这里02用户id " + app.globalData.tsSysUserId)
     wx.request({
       // url: app.globalData.apiUrl +'/system/ppOrder/queryXXL',
       url: app.globalData.apiUrl + '/queryXXL',
-      data: { orderStatus: '新建', tsSysUserId: app.globalData.tsSysUserId},
+      data: { orderStatus: '新建', tsSysUserId: app.globalData.tsSysUserId },
+
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -55,11 +56,13 @@ Page({
     })
     console.log("List: ", this.data.list)
   },
- 
+
   /**
    * 点击时把数组的index给curtTab
    */
   navbarTap: function (e) {
+
+    console.log
     this.setData({
       curtTab: e.currentTarget.dataset.idx
     })
@@ -67,7 +70,7 @@ Page({
   },
 
   navbarTap1: function (e) {
-
+console.log("log 0917 -1 " + e)
     this.setData({
       curtList: e.currentTarget.dataset.idx
     })
@@ -81,13 +84,20 @@ Page({
       orderStatusO = '取消'
     } else if (e.currentTarget.dataset.idx == '3') {
       orderStatusO = ''
-    }  
+    }
+
+    console.log("orderStatusO " + orderStatusO)
+
     var _this = this
     wx.request({
       // url: app.globalData.apiUrl + '/system/ppOrder/queryXXL',
       url: app.globalData.apiUrl + '/queryXXL',
 
-      data: { orderStatus: orderStatusO, tsSysUserId: app.globalData.tsSysUserId },
+      data: {
+        orderStatus: orderStatusO,
+        tsSysUserId: app.globalData.tsSysUserId
+      },
+
       method: 'POST',
       header: {
         'content-type': 'application/json',
@@ -105,24 +115,24 @@ Page({
 
       }
     })
-     
+
   },
 
-  
+
   /**
  * 订单明细查看
  */
-  orderClick: function(e) {
+  orderClick: function (e) {
     console.log("订单明细查看")
     console.log(e);
     console.log(e.currentTarget.dataset.id);
-   
-     wx.navigateTo({ 
-       url: "orderdetail/orderdetail?dcPpOrderId=" + JSON.stringify(e.currentTarget.dataset.id), 
-       
-      })
+
+    wx.navigateTo({
+      url: "orderdetail/orderdetail?dcPpOrderId=" + JSON.stringify(e.currentTarget.dataset.id),
+
+    })
   }
 
- 
+
 
 })

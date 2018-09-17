@@ -45,12 +45,12 @@ App({
 
   globalData: {
     /*** 开发环境地址  ***/
-  //  apiUrl: 'https://localhost',
+   apiUrl: 'https://localhost',
     // apiUrl: 'http://localhost:8188/xxl-auth',
     // apiUrl: 'http://47.96.94.63:8188/xxl-auth',
 
     /*** 正式环境地址  ***/
-    apiUrl: 'https://jsxsdqc.com',
+    // apiUrl: 'https://jsxsdqc.com',
 
     /*** 确证  ***/
     userInfo: null,
